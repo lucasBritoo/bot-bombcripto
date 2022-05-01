@@ -1,4 +1,5 @@
 import acction
+import config
 from time import sleep
 
 
@@ -25,7 +26,7 @@ def soltarTodosHerois(perfil_region):
         return False
 
     else:
-        sleep(acction.DELAY_MENUS)
+        sleep(config.DELAY_MENUS)
         local = acction.iniciarTodos(perfil_region)
 
         if local is None:
@@ -34,7 +35,7 @@ def soltarTodosHerois(perfil_region):
 
         else:
             print('Todos os herois estão soltos')
-            sleep(acction.DELAY_MENUS)
+            sleep(config.DELAY_MENUS)
 
             local = acction.fecharMenu(perfil_region)
 
@@ -44,7 +45,7 @@ def soltarTodosHerois(perfil_region):
 
             else:
                 print('Entrando no treasure hunt')
-                sleep(acction.DELAY_MENUS)
+                sleep(config.DELAY_MENUS)
 
                 local = acction.iniciarAventura(perfil_region)
                 if local is None:
@@ -66,7 +67,7 @@ def pararTodosHerois(perfil_region):
         return False
 
     else:
-        sleep(acction.DELAY_MENUS)
+        sleep(config.DELAY_MENUS)
         local = acction.pararTodos(perfil_region)
 
         if local is None:
@@ -75,7 +76,7 @@ def pararTodosHerois(perfil_region):
 
         else:
             print('Todos os herois estão parados')
-            sleep(acction.DELAY_MENUS)
+            sleep(config.DELAY_MENUS)
 
             local = acction.fecharMenu(perfil_region)
 

@@ -3,12 +3,13 @@ from datetime import datetime
 import login
 import acction
 import game
+import config
 
 
 def logar(perfil):
 
     accept = 0
-    while accept < acction.TRY_LOGIN:
+    while accept < config.TRY_LOGIN:
 
         logarConta = login.logarConta(perfil)
 
@@ -24,13 +25,13 @@ def logar(perfil):
 def iniciarJogatina(perfil):
 
     if perfil == 1:
-        region = acction.REGION1
+        region = config.REGION1
 
     else:
-        region = acction.REGION2
+        region = config.REGION2
 
     accept = 0
-    while accept < acction.TRY_LOGIN:
+    while accept < config.TRY_LOGIN:
 
         iniciar = game.soltarTodosHerois(region)
 
@@ -46,12 +47,12 @@ def iniciarJogatina(perfil):
 def soltarHerois(region):
     contador = 0
 
-    while contador < acction.TRY_MENU:
+    while contador < config.TRY_MENU:
 
         if game.voltarMenuPrincipal(region):
-            sleep(acction.DELAY_MENUS)
+            sleep(config.DELAY_MENUS)
             if game.soltarTodosHerois(region):
-                sleep(acction.DELAY_MENUS)
+                sleep(config.DELAY_MENUS)
                 return True
         sleep(3)
         contador += 1
@@ -61,12 +62,12 @@ def soltarHerois(region):
 
 def voltarMenu(region):
     contador = 0
-    while contador < acction.TRY_MENU:
+    while contador < config.TRY_MENU:
         if game.voltarMenuPrincipal(region):
-            sleep(acction.DELAY_MENUS)
+            sleep(config.DELAY_MENUS)
 
             if acction.iniciarAventura(region):
-                sleep(acction.DELAY_MENUS)
+                sleep(config.DELAY_MENUS)
                 return True
         sleep(3)
         contador += 1
@@ -83,12 +84,12 @@ def main():
 
         if inicio == 0:
             if logar(1):
-                if game.soltarTodosHerois(acction.REGION1):
+                if game.soltarTodosHerois(config.REGION1):
                     inicio = 1
 
         elif inicio == 1:
             if logar(2):
-                if game.soltarTodosHerois(acction.REGION2):
+                if game.soltarTodosHerois(config.REGION2):
                     inicio = 2
 
         elif inicio == 2:
@@ -104,19 +105,21 @@ def main():
 
                 if flag_reload != 0:
                     print(
-                        f"Nao foi possivel interagir com a conta {flag_reload} .Reconectando")
+                        f'Nao foi possivel interagir com a conta {flag_reload}'
+                        + '.Reconectand')
                     logar(flag_reload)
 
-                elif (minuto_atual - minuto_menu) >= acction.TIMER_MENU or (minuto_atual - minuto_menu) < 0:
+                elif ((minuto_atual - minuto_menu) >= config.TIMER_MENU
+                        or (minuto_atual - minuto_menu) < 0):
                     minuto_menu = int(datetime.now().strftime('%M'))
 
                     print('Voltando ao menu principal')
 
-                    if voltarMenu(acction.REGION1):
+                    if voltarMenu(config.REGION1):
                         flag_reload = 0
 
                         sleep(3)
-                        if voltarMenu(acction.REGION2):
+                        if voltarMenu(config.REGION2):
                             flag_reload = 0
 
                         else:
@@ -125,17 +128,18 @@ def main():
                     else:
                         flag_reload = 1
 
-                elif (minuto_atual - minuto_herois) >= acction.TIMER_HEROIS or (minuto_atual - minuto_herois) < 0:
+                elif ((minuto_atual - minuto_herois) >= config.TIMER_HEROIS
+                      or (minuto_atual - minuto_herois) < 0):
                     minuto_herois = int(datetime.now().strftime('%M'))
 
                     print('Soltando todos os herois')
 
-                    if soltarHerois(acction.REGION1):
+                    if soltarHerois(config.REGION1):
                         print("Os herois da conta 1 estao trabalhando")
                         flag_reload = 0
 
                         sleep(3)
-                        if soltarHerois(acction.REGION2):
+                        if soltarHerois(config.REGION2):
                             print("os herois da conta 2 estao trabalhando")
                             flag_reload = 0
                         else:
@@ -143,7 +147,7 @@ def main():
                     else:
                         flag_reload = 1
 
-        sleep(60)
+        # sleep(60)
 
 
 if __name__ == '__main__':

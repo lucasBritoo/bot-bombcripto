@@ -1,4 +1,5 @@
 import acction
+import config
 from time import sleep
 
 
@@ -14,9 +15,9 @@ def conectarMetamask(perfil_region):
         print('Aceitando login na metamask')
         contador = 0
 
-        while contador < acction.TRY_METAMASK:
+        while contador < config.TRY_METAMASK:
 
-            sleep(acction.DELAY_METAMASK)
+            sleep(config.DELAY_METAMASK)
             local = acction.clickSign(perfil_region)
 
             if local is not None:
@@ -37,7 +38,7 @@ def connect(perfil_region):
     local = acction.login(perfil_region)
 
     if local is not None:
-        sleep(acction.DELAY_DEFAULT)
+        sleep(config.DELAY_DEFAULT)
         return True
 
     return False
@@ -46,14 +47,14 @@ def connect(perfil_region):
 def verificarLogin(perfil_region):
 
     contador = 0
-    while contador < acction.TRY_LOGIN:
+    while contador < config.TRY_LOGIN:
         print('Verificando se a conta está logada')
         local = acction.localizarChave(perfil_region)
 
         if local is not None:
             return True
 
-        sleep(acction.DELAY_LOGIN)
+        sleep(config.DELAY_LOGIN)
         contador += 1
 
     return False
@@ -62,7 +63,7 @@ def verificarLogin(perfil_region):
 def logar(perfil_region):
 
     condicao = 0
-    while condicao < acction.TRY_LOGIN:
+    while condicao < config.TRY_LOGIN:
 
         if connect(perfil_region):
             print('Realizando login na metamask')
@@ -87,10 +88,10 @@ def logar(perfil_region):
 def logarConta(perfil):
 
     if perfil == 1:
-        perfil_region = acction.REGION1
+        perfil_region = config.REGION1
 
     else:
-        perfil_region = acction.REGION2
+        perfil_region = config.REGION2
 
     if logar(perfil_region):
         print('Conta logada com sucesso')
@@ -99,9 +100,9 @@ def logarConta(perfil):
     else:
 
         if perfil == 1:
-            acction.recarregarPagina(acction.MID_LOCATION1)
+            acction.recarregarPagina(config.MID_LOCATION1)
 
         else:
-            acction.recarregarPagina(acction.MID_LOCATION2)
+            acction.recarregarPagina(config.MID_LOCATION2)
 
     return False
