@@ -38,6 +38,10 @@ DELAY_MENUS = 5
 
 TRY_METAMASK = 5
 TRY_LOGIN = 5
+TRY_MENU = 3
+
+TIMER_MENU = 3
+TIMER_HEROIS = 20
 
 
 def verificarPositiao():
